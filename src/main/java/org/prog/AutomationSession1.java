@@ -21,5 +21,9 @@ public class AutomationSession1 {
 
         Car car = new Car();
         car.color = "red";
+        car.goTo("Kyiv");
+        Car car2 = new Car();
+        car2.color = "blue";
+        car2.goTo("Odessa");
     }
 }
