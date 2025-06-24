@@ -23,6 +23,8 @@ public class CarService {
             coffeeBreak(sasha);
             vova.paintCar(carToPaint, newCarColor);
         }
+
+        vova.polishCar(carToPaint);
     }
 
     private void coffeeBreak(CarPainter carPainter) {
