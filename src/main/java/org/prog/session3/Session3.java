@@ -1,5 +1,8 @@
 package org.prog.session3;
 
+import org.prog.session3.phones.AndroidPhone;
+import org.prog.session3.phones.IPhone;
+import org.prog.session3.phones.IPhoneCamera;
 import org.prog.session3.poly.BMW;
 import org.prog.session3.poly.ICar;
 import org.prog.session3.poly.Mazda;
@@ -33,6 +36,9 @@ public class Session3 {
         mazda.driveTo("Lviv", "Odessa");
         System.out.println("===================================");
         mazda.driveTo("Lviv", "Odessa", "Dnipro");
+        System.out.println("===================================");
+        mazda.driveTo("Lviv", "Odessa", "Dnipro", 4, true);
+
 
 //        driveTo(mazda);
 //        System.out.println("==============================");
@@ -59,7 +65,15 @@ public class Session3 {
 //        org.prog.session1.Car car = new org.prog.session1.Car();
 //        org.prog.session2.Car car2 = new org.prog.session2.Car();
 
+        IPhoneCamera[] phones = new IPhoneCamera[] {
+            new AndroidPhone(),
+            new IPhone()
+        };
 
+        for (int i=0; i< phones.length; i++) {
+            phones[i].takePhoto();
+            phones[i].takePhoto();
+        }
     }
 
 
