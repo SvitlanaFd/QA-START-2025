@@ -33,6 +33,21 @@ public class Session4 {
         System.out.println(car1.toString());
         System.out.println(car2.toString());
 
-
+        //Car car1 = new Car();
+        car1.color = "red";
+        car1.model = "bmw";
+        //Car car2 = new Car();
+        car2.color = "red";
+        car2.model = "mers";
+        Car car3 = new Car();
+        car3.color = "red";
+        car3.model = "bmw";
+        System.out.println(car1.hashCode());
+        System.out.println(car2.hashCode());
+        System.out.println(car3.hashCode());
+        System.out.println(car1.equals(car2));
+        System.out.println(car1.equals(car3));
+        System.out.println(car1 == car2);
+        System.out.println(car1 == car3);
     }
 }
