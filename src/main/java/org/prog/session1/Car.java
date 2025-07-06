@@ -17,19 +17,23 @@ public class Car {
         if (obj instanceof Car) {
             Car car = (Car) obj;
 
+            boolean isColorEqual = true;
             if (this.color == null && car.color == null)
-                return true;
+                isColorEqual = true;
+            else if ((this.color == null && car.color != null) || (this.color != null && car.color == null))
+                isColorEqual = false;
+            else
+                isColorEqual = this.color.equals(car.color);
 
-            if ((this.color == null && car.color != null) || (this.color != null && car.color == null))
-                return false;
-
+            boolean isModelEqual = true;
             if (this.model == null && car.model == null)
-                return true;
+                isModelEqual = true;
+            else if ((this.model == null && car.model != null) || (this.model != null && car.model == null))
+                isModelEqual = false;
+            else
+                isModelEqual = this.model.equals(car.model);
 
-            if ((this.model == null && car.model != null) || (this.model != null && car.model == null))
-                return false;
-
-            return this.color.equals(car.color) && this.model.equals(car.model);
+            return isColorEqual && isModelEqual;
         }
         return false;
     }
