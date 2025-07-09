@@ -4,9 +4,12 @@ package org.prog.session1;
 public class Car {
 
     public String color;
+    public String destination;
+    public String carName;
 
     public void goTo() {
-        System.out.println(color + " car is going somewhere");
+
+        System.out.println(carName + " " + color + " car " + " went to " + destination);
     }
 
     @Override
