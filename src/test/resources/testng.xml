@@ -2,7 +2,7 @@
 <suite name="Client side functionality" verbose="1">
     <test name="Make order and pay for it">
         <classes>
-            <class name="org.prog.session8.SeleniumWaitTests"/>
+            <class name="org.prog.session8.AlloTests"/>
         </classes>
     </test>
 </suite>
