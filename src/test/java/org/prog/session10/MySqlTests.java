@@ -1,6 +1,9 @@
 package org.prog.session10;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
+import io.restassured.config.ObjectMapperConfig;
 import io.restassured.response.Response;
 import org.prog.session9.PersonDto;
 import org.prog.session9.ResultsDto;
@@ -24,6 +27,16 @@ public class MySqlTests {
 
     @BeforeSuite
     public void beforeSuite() throws ClassNotFoundException, SQLException {
+        RestAssured.config = RestAssured.config()
+                .objectMapperConfig(
+                        ObjectMapperConfig.objectMapperConfig()
+                                .jackson2ObjectMapperFactory((cls, charset) -> {
+                                    ObjectMapper mapper = new ObjectMapper();
+                                    mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+                                    return mapper;
+                                })
+                );
+
         Class.forName("com.mysql.cj.jdbc.Driver");
         connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/db", "root", "password");
@@ -59,7 +72,7 @@ public class MySqlTests {
         List<PersonDto> personDtos = resultsDto.getResults();
 //            Statement statement = connection.createStatement();
         PreparedStatement preparedStatement = connection.prepareStatement(
-                "INSERT INTO Persons (FirstName, LastName, Gender, Title, Nat) VALUES (?,?,?,?,?)"
+                "INSERT INTO Persons (FirstName, LastName, Gender, Title, Nat, City, Street, HouseNumber) VALUES (?,?,?,?,?,?,?,?)"
         );
 
         personDtos.forEach(dto -> executeStatement(dto, preparedStatement));
@@ -90,6 +103,9 @@ public class MySqlTests {
             preparedStatement.setString(3, dto.getGender());
             preparedStatement.setString(4, dto.getName().getTitle());
             preparedStatement.setString(5, dto.getNat());
+            preparedStatement.setString(6, dto.getLocation().getCity());
+            preparedStatement.setString(7, dto.getLocation().getStreet().getName());
+            preparedStatement.setInt(8, dto.getLocation().getStreet().getNumber());
             preparedStatement.execute();
         } catch (Exception e) {
             System.out.println("Error inserting person: " + dto);
@@ -100,7 +116,7 @@ public class MySqlTests {
         Response respones = RestAssured.given()
                 .baseUri("https://randomuser.me/")
                 .basePath("api/")
-                .queryParam("inc", "gender,name,nat")
+                .queryParam("inc", "gender,name,nat,location")
                 .queryParam("results", amount)
                 .queryParam("noinfo")
                 .get();
