@@ -26,7 +26,9 @@ Feature: training scenarios
     When I set search to "random_person"
     Then Search field contains "random_person"
 
-
+Scenario: From session 10 - call API and put into DB
+  Given request 3 random people from API as "crowd2"
+  And I store "crowd2" in database
 
 
 

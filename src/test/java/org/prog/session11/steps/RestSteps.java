@@ -13,7 +13,7 @@ public class RestSteps {
         Response response = RestAssured.given()
                 .baseUri("https://randomuser.me/")
                 .basePath("api/")
-                .queryParam("inc", "gender,name,nat")
+                .queryParam("inc", "gender,name,nat,location")
                 .queryParam("results", amount)
                 .queryParam("noinfo")
                 .get();
