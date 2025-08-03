@@ -51,6 +51,7 @@ public class CucumberRunner extends AbstractTestNGCucumberTests {
             put("enableVideo", true);
             put("enableVNC", true);
         }});
+
         return chromeOptions;
     }
 }
